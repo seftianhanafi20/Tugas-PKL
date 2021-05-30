@@ -26,6 +26,11 @@ if($level=="admin"){ ?>
         $sql = mysqli_query($con, "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user WHERE id_gg='$id'") or die (mysqli_error($con));
         $data = mysqli_fetch_array($sql);
         $id_gg=$data['id_gg'];
+        $wtl = $data['waktu_trip_lepas'];
+        $wtm = $data['waktu_trip_masuk'];
+        $wtripl = date("Y-m-d\TH:i", strtotime($wtl));
+        $wtripm = date("Y-m-d\TH:i", strtotime($wtm));
+        // echo "Changed date format is: ". $changeDate. " (MM-DD-YYYY)";
         // $wtripl = strtotime($data['waktu_trip_lepas']);
         // $launch_date = str_replace("/", "-", $launch_date);
       ?>
@@ -132,13 +137,11 @@ if($level=="admin"){ ?>
                           </div>
                           <div class="form-group">
                               <label for="inputName">Waktu Trip Lepas</label>
-                              <!-- <input type="text" id="inputName" class="form-control" name="waktu_tripl" value="<?=date('d/m/Y H:i', $wtripl)?>"> -->
-                              <input type="datetime-local" id="inputName" class="form-control" name="waktu_tripl" value="<?=$data['waktu_trip_lepas']?>">
-                              <!-- <input type="datetime-local" id="inputName" class="form-control" name="waktu_tripl" value="2014-01-02T11:42"> -->
+                              <input type="datetime-local"  id="inputName" class="form-control" name="waktu_tripl" value="<?=$wtripl?>">
                           </div>
                           <div class="form-group">
                               <label for="inputName">Waktu Trip Masuk</label>
-                              <input type="datetime-local" id="inputName" class="form-control" name="waktu_tripm" value="">
+                              <input type="datetime-local" id="inputName" class="form-control" name="waktu_tripm" value="<?=$wtripm?>">
                           </div>
                           <div class="form-group">
                               <label for="inputDescription">Keterangan</label>
