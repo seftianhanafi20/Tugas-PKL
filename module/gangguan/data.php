@@ -230,16 +230,16 @@ if($level=="admin"){
 				if($_SERVER['REQUEST_METHOD'] == "POST") {
 					$pencarian = trim(mysqli_real_escape_string($con, $_POST['pencarian']));
 					if($pencarian != '') {
-						$sql = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user WHERE id_user='$id_user' AND penyebab LIKE '%$pencarian%'";
+						$sql = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user WHERE id_user='$id_user' AND penyebab LIKE '%$pencarian%' ORDER BY id_gg DESC";
 						$query = $sql;
 						$queryJml = $sql;
 					} else {
-						$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user WHERE id_user='$id_user' LIMIT $posisi, $batas";
+						$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user WHERE id_user='$id_user' ORDER BY id_gg DESC LIMIT $posisi, $batas";
 						$queryJml = "SELECT * FROM status_gg";
 						$no = $posisi + 1;
 					}
 				} else {
-					$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user WHERE id_user='$id_user' LIMIT $posisi, $batas";
+					$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user WHERE id_user='$id_user' ORDER BY id_gg DESC LIMIT $posisi, $batas";
 					$queryJml = "SELECT * FROM status_gg";
 					$no = $posisi + 1;
 				}
@@ -385,16 +385,16 @@ if($level=="admin"){
 				if($_SERVER['REQUEST_METHOD'] == "POST") {
 					$pencarian = trim(mysqli_real_escape_string($con, $_POST['pencarian']));
 					if($pencarian != '') {
-						$sql = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user WHERE penyebab LIKE '%$pencarian%'";
+						$sql = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user ORDER BY id_gg DESC WHERE penyebab LIKE '%$pencarian%'";
 						$query = $sql;
 						$queryJml = $sql;
 					} else {
-						$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user LIMIT $posisi, $batas";
+						$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user ORDER BY id_gg DESC LIMIT $posisi, $batas";
 						$queryJml = "SELECT * FROM status_gg";
 						$no = $posisi + 1;
 					}
 				} else {
-					$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user LIMIT $posisi, $batas";
+					$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user ORDER BY id_gg DESC LIMIT $posisi, $batas";
 					$queryJml = "SELECT * FROM status_gg";
 					$no = $posisi + 1;
 				}

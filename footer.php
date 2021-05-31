@@ -131,6 +131,7 @@ $username='1';
     })
   })
 </script>
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?=BASE_URL('dist/js/pages/dashboard.js');?>"></script>
 

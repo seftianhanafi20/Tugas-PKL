@@ -59,7 +59,7 @@ if($level=="admin"){
 				} else {
 					$posisi = ($hal - 1) * $batas;
 				}
-				$no = 1;
+				$no = 0;
 				if($_SERVER['REQUEST_METHOD'] == "POST") {
 					$pencarian = trim(mysqli_real_escape_string($con, $_POST['pencarian']));
 					if($pencarian != '') {
@@ -72,14 +72,14 @@ if($level=="admin"){
 						$no = $posisi + 1;
 					}
 				} else {
-					$query = "SELECT * FROM transmisi_trafo NATURAL JOIN ultg LIMIT $posisi, $batas";
+					$query = "SELECT * FROM transmisi_trafo NATURAL JOIN ultg ORDER BY id_tt DESC LIMIT $posisi, $batas";
 					$queryJml = "SELECT * FROM transmisi_trafo";
-					$no = $posisi + 1;
+					$no = $posisi + 0;
 				}
 				
 				$sql = mysqli_query($con, $query) or die (mysqli_error($con));
 				if(mysqli_num_rows($sql) > 0) {
-					$no=0;
+					// $no=0;
 					while($data = mysqli_fetch_array($sql)) { 
 						$no++;
 						?>
@@ -103,20 +103,6 @@ if($level=="admin"){
 				}
 				?>
                   </tbody>
-                  <!-- <tfoot>
-                  <tr>
-				  	<th>No</th>
-                    <th>Nama</th>
-                    <th>Alamat</th>
-                    <th>Tempat lahir</th>
-					<th>Tanggal Lahir</th>
-					<th>Jenis Kelamin</th>
-					<th>Email</th>
-					<th>No. Hp</th>
-					<th>Gambar</th>
-					<th>Action</th>
-                  </tr>
-                  </tfoot> -->
                 </table>
 				</div>
               </div>

@@ -28,6 +28,9 @@
           <div class="col-12">
             <div class="card">
 			<div class="card-header">
+				<div style="float: right;">
+					<a href="add.php" class="btn btn-block bg-gradient-primary">Add <i class="fas fa-plus"></i></a>
+				</div>
 				<input type="text" name="pencarian" id="pencarian" class="form-control" placeholder="search..." aria-label="Search" style="width: 250px;">
 				<!-- <h3 class="card-title">DataTable with minimal features & hover style</h3> -->
 				<!-- <div style="float: left;">
@@ -47,14 +50,14 @@
                   <tr>
 				  	<th>No</th>
                     <th>Level</th>
-                    <th>Nama</th>
                     <th>No. Induk</th>
                     <th>Nama</th>
-                    <th>Email</th>
-                    <th>Alamat</th>
-                    <th>No. HP</th>
-					<th>Username</th>
+                    <th>Username</th>
 					<th>Password</th>
+                    <th>Alamat</th>
+                    <th>Jenis Kelamin</th>
+                    <th>No. HP</th>
+                    <th>Email</th>
 					<th>Action</th>
                   </tr>
                   </thead>
@@ -97,14 +100,14 @@
 						<tr>
 							<td><?php echo $no; ?>.</td>
 							<td><?=$data['level']?></td>
-							<td><?=$data['nama']?></td>
 							<td><?=$data['no_induk']?></td>
 							<td><?=$data['nama']?></td>
-							<td><?=$data['email']?></td>
-							<td><?=$data['alamat']?></td>
-							<td><?=$data['no_hp']?></td>
 							<td><?=$data['username']?></td>
 							<td><?=$data['password']?></td>
+							<td><?=$data['alamat']?></td>
+							<td><?=$data['jk']?></td>
+							<td><?=$data['no_hp']?></td>
+							<td><?=$data['email']?></td>
 							
 							<td class="text-center">
 								<div class="btn-group">

@@ -3,7 +3,7 @@ include_once('../../header.php');
 $level = isset($_SESSION['level']) ? $_SESSION['level'] : false;
 $username = isset($_SESSION['user']) ? $_SESSION['user'] : false;
 $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : false;
-if($level=="admin"){ ?>
+if($level=="admin" || $level=="pegawai"){ ?>
     <div class="content-wrapper kanban">
     <?php 
         // $id_transformator = $_GET['id_transformator'];
@@ -12,11 +12,7 @@ if($level=="admin"){ ?>
     ?>
     <section class="content-header">
       <div class="container-fluid">
-        <!-- <div class="row">
-          <div class="col-sm-6">
-            <h1>Transformator ID: <?=$data['id_transformator']?> <?=$data['nama_gi']?></h1>
-          </div>
-        </div> -->
+
       </div>
     </section>
 
@@ -30,9 +26,6 @@ if($level=="admin"){ ?>
         $wtm = $data['waktu_trip_masuk'];
         $wtripl = date("Y-m-d\TH:i", strtotime($wtl));
         $wtripm = date("Y-m-d\TH:i", strtotime($wtm));
-        // echo "Changed date format is: ". $changeDate. " (MM-DD-YYYY)";
-        // $wtripl = strtotime($data['waktu_trip_lepas']);
-        // $launch_date = str_replace("/", "-", $launch_date);
       ?>
       <form action="proses_edit.php" method="POST" enctype="multipart/form-data">
         <div class="row">
@@ -87,8 +80,6 @@ if($level=="admin"){ ?>
                       
                                   // sembunyikan form kabupaten, kecamatan dan desa
                                   $("#form_tt").show();
-                                  // $("#form_kec").hide();
-                                  // $("#form_des").hide();
                       
                                   // ambil data kabupaten ketika data memilih provinsi
                                   $('body').on("change","#form_ultg",function(){
@@ -101,8 +92,6 @@ if($level=="admin"){ ?>
                                           success: function(hasil) {
                                               $("#form_tt").html(hasil);
                                               $("#form_tt").show();
-                                              // $("#form_kec").hide();
-                                              // $("#form_des").hide();
                                           }
                                       });
                                   });      
