@@ -31,10 +31,11 @@ if($level=="admin"){
           <div class="col-12">
             <div class="card">
               <div class="card-header">
+				<input type="text" name="pencarian" id="pencarian" class="form-control" placeholder="Search Transmisi/Trafo..." aria-label="Search" style="width: 250px;">
 				<!-- <h3 class="card-title">DataTable with minimal features & hover style</h3> -->
-				<div style="float: right;">
+				<!-- <div style="float: right;">
 					<a href="add.php" class="btn btn-block bg-gradient-primary">Add <i class="fas fa-plus"></i></a>
-				</div>
+				</div> -->
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -43,13 +44,14 @@ if($level=="admin"){
                   <thead>
                   <tr>
                     <th>No</th>
+                    <th>ID</th>
                     <th>ULTG</th>
 					<th>Transmisi/Trafo</th>
 					<th>Kode</th>
 					<th>Action</th>
                   </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="tampil">
                   <?php
 				$batas = 10;
 				$hal = @$_GET['hal'];
@@ -86,13 +88,14 @@ if($level=="admin"){
 	
 						<tr>
 							<td><?php echo $no; ?>.</td>
+							<td><?=$data['id_tt']?></td>
 							<td><?=$data['nama_ultg']?></td>
 							<td><?=$data['nama_tt']?></td>					
 							<td><?=$data['kode']?></td>					
 							<td class="text-center">
 								<div class="btn-group">
 									<a href="edit.php?id=<?=$data['id_tt']?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-									<a href="del.php?id=<?=$data['id_tt']?>" onclick="return confirm('Yakin akan menghapus data?')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+									<!-- <a href="del.php?id=<?=$data['id_tt']?>" onclick="return confirm('Yakin akan menghapus data?')" class="btn btn-danger"><i class="fas fa-trash"></i></a> -->
 								</div>
 							</td>
 						</tr>
@@ -106,6 +109,23 @@ if($level=="admin"){
                 </table>
 				</div>
               </div>
+			  <script type="text/javascript">
+					$(document).ready(function() {
+						$('#pencarian').on('keyup', function() {
+							$.ajax({
+								type: 'POST',
+								url: 'search.php',
+								data: {
+									pencarian: $(this).val()
+								},
+								cache: false,
+								success: function(data) {
+									$('#tampil').html(data);
+								}
+							});
+						});
+					});
+			  </script>
               <!-- /.card-body -->
 			  <?php
 					error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));

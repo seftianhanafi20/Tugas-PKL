@@ -16,24 +16,24 @@
             $no++;
 ?>
         <tr>
-							<td><?php echo $no; ?>.</td>
-							<td><?=$data['level']?></td>
-							<td><?=$data['nama']?></td>
-							<td><?=$data['no_induk']?></td>
-							<td><?=$data['nama']?></td>
-							<td><?=$data['email']?></td>
-							<td><?=$data['alamat']?></td>
-							<td><?=$data['no_hp']?></td>
-							<td><?=$data['username']?></td>
-							<td><?=$data['password']?></td>
-							
-							<td class="text-center">
-								<div class="btn-group">
-									<a href="edit.php?id=<?=$data['id_user']?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-									<a href="del.php?id=<?=$data['id_user']?>" onclick="return confirm('Yakin akan menghapus data?')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-								</div>
-							</td>
-						</tr>
+			<td><?php echo $no; ?>.</td>
+			<td><?=$data['level']?></td>
+			<td><?=$data['nama']?></td>
+			<td><?=$data['no_induk']?></td>
+			<td><?=$data['nama']?></td>
+			<td><?=$data['email']?></td>
+			<td><?=$data['alamat']?></td>
+			<td><?=$data['no_hp']?></td>
+			<td><?=$data['username']?></td>
+			<td><?=$data['password']?></td>
+			
+			<td class="text-center">
+				<div class="btn-group">
+					<a href="edit.php?id=<?=$data['id_user']?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+					<a href="del.php?id=<?=$data['id_user']?>" onclick="return confirm('Yakin akan menghapus data?')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+				</div>
+			</td>
+		</tr>
 <?php }
 } else {
 	echo "<tr><td colspan=\"9\" align=\"center\">Data tidak ditemukan</td></tr>";

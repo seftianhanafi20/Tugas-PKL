@@ -3,6 +3,7 @@ include_once('../header.php');
 $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : false;
 $level = isset($_SESSION['level']) ? $_SESSION['level'] : false;
 $username = isset($_SESSION['user']) ? $_SESSION['user'] : false;
+if($level=="admin" || $level=="pegawai"){
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -25,9 +26,8 @@ $username = isset($_SESSION['user']) ? $_SESSION['user'] : false;
   
     <!-- Main content -->
     <section class="content">
-      <div style="float: right;" class="bulan">
+      <!-- <div style="float: right;" class="bulan">
         <form method="POST" action="" class="form-inline">
-          <!-- <span>Jumlah data: <b><?= $s ?></b> &nbsp;&nbsp;</span> -->
           <label for="date1">Tampilkan transaksi bulan&nbsp;</label>
           <select class="form-control mr-2" name="bulan">
             <option value="">-</option>
@@ -46,7 +46,7 @@ $username = isset($_SESSION['user']) ? $_SESSION['user'] : false;
           </select>
           <button type="submit" name="submit" class="btn btn-primary">Tampilkan</button>
         </form>
-      </div>
+      </div> -->
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6">
@@ -195,6 +195,8 @@ $username = isset($_SESSION['user']) ? $_SESSION['user'] : false;
     </section>
     <!-- /.content -->
   </div>
+
+<?php } ?>
   <!-- /.content-wrapper -->
   <script>
   $(function () {
@@ -211,7 +213,8 @@ $username = isset($_SESSION['user']) ? $_SESSION['user'] : false;
     var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
 
     var areaChartData = {
-      labels  : ['Banjar', 'Bandarmasih'],
+
+      labels  : ['Bandarmasih', 'Banjar', 'Muara Teweh', 'Palangkaraya', 'Barabai',],
       datasets: [
         {
           label               : 'TRIP',
@@ -223,9 +226,30 @@ $username = isset($_SESSION['user']) ? $_SESSION['user'] : false;
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(60,141,188,1)',
           data                : [<?php 
-                                  $jumlah_trip = mysqli_query($con,"select * from status_gg where nama_status ='TRIP'");
-                                  echo mysqli_num_rows($jumlah_trip);
-                                ?>]
+                                  $jumlahtrip = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,nama_status FROM status_gg NATURAL JOIN ultg WHERE nama_status ='TRIP' AND nama_ultg='Bandarmasih'");
+                                  echo mysqli_num_rows($jumlahtrip);
+                                ?>
+                                ,
+                                <?php 
+                                  $jumlahtrip1 = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,nama_status FROM status_gg NATURAL JOIN ultg WHERE nama_status ='TRIP' AND nama_ultg='Banjar'");
+                                  echo mysqli_num_rows($jumlahtrip1);
+                                ?>
+                                ,
+                                <?php 
+                                  $jumlahtrip2 = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,nama_status FROM status_gg NATURAL JOIN ultg WHERE nama_status ='TRIP' AND nama_ultg='Muara Teweh'");
+                                  echo mysqli_num_rows($jumlahtrip2);
+                                ?>
+                                ,
+                                <?php 
+                                  $jumlahtrip3 = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,nama_status FROM status_gg NATURAL JOIN ultg WHERE nama_status ='TRIP' AND nama_ultg='Palangkaraya'");
+                                  echo mysqli_num_rows($jumlahtrip3);
+                                ?>
+                                ,
+                                <?php 
+                                  $jumlahtrip4 = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,nama_status FROM status_gg NATURAL JOIN ultg WHERE nama_status ='TRIP' AND nama_ultg='Barabai'");
+                                  echo mysqli_num_rows($jumlahtrip4);
+                                ?>
+                                ]
         },
         {
           label               : 'AR',
@@ -237,11 +261,32 @@ $username = isset($_SESSION['user']) ? $_SESSION['user'] : false;
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(220,220,220,1)',
           data                : [<?php 
-                                  $jumlah_ar = mysqli_query($con,"select * from status_gg where nama_status ='AR'");
+                                  $jumlah_ar = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,nama_status FROM status_gg NATURAL JOIN ultg WHERE nama_status ='AR' AND nama_ultg='Bandarmasih'");
                                   echo mysqli_num_rows($jumlah_ar);
-                                ?>]
+                                ?>
+                                ,
+                                <?php 
+                                  $jumlah_ar1 = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,nama_status FROM status_gg NATURAL JOIN ultg WHERE nama_status ='AR' AND nama_ultg='Banjar'");
+                                  echo mysqli_num_rows($jumlah_ar1);
+                                ?>
+                                ,
+                                <?php 
+                                  $jumlah_ar2 = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,nama_status FROM status_gg NATURAL JOIN ultg WHERE nama_status ='AR' AND nama_ultg='Muara Teweh'");
+                                  echo mysqli_num_rows($jumlah_ar2);
+                                ?>
+                                ,
+                                <?php 
+                                  $jumlah_ar3 = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,nama_status FROM status_gg NATURAL JOIN ultg WHERE nama_status ='AR' AND nama_ultg='Palangkaraya'");
+                                  echo mysqli_num_rows($jumlah_ar3);
+                                ?>
+                                ,
+                                <?php 
+                                  $jumlah_ar4 = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,nama_status FROM status_gg NATURAL JOIN ultg WHERE nama_status ='AR' AND nama_ultg='Barabai'");
+                                  echo mysqli_num_rows($jumlah_ar4);
+                                ?>
+                                ]
         },
-      ]
+      ]      
     }
 
     var areaChartOptions = {
@@ -294,16 +339,46 @@ $username = isset($_SESSION['user']) ? $_SESSION['user'] : false;
     var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
     var donutData        = {
       labels: [
-          'Chrome',
-          'IE',
-          'FireFox',
-          'Safari',
-          'Opera',
-          'Navigator',
+        'Lain-lain',
+        'Pohon',
+        'Petir',
+        'Hewan',
+        'Peralatan',
+        'Proteksi',
       ],
       datasets: [
         {
-          data: [700,500,400,600,300,100],
+          data: [
+            <?php 
+              $jlh_ll = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,penyebab FROM status_gg NATURAL JOIN ultg WHERE penyebab ='Lain-lain' AND nama_ultg='Bandarmasih'");
+              echo mysqli_num_rows($jlh_ll);
+            ?>
+            ,
+            <?php 
+              $jlh_phn = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,penyebab FROM status_gg NATURAL JOIN ultg WHERE penyebab ='Pohon' AND nama_ultg='Bandarmasih'");
+              echo mysqli_num_rows($jlh_phn);
+            ?>
+            ,
+            <?php 
+              $jlh_ptr = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,penyebab FROM status_gg NATURAL JOIN ultg WHERE penyebab ='Petir' AND nama_ultg='Bandarmasih'");
+              echo mysqli_num_rows($jlh_ptr);
+            ?>
+            ,
+            <?php 
+              $jlh_hwn = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,penyebab FROM status_gg NATURAL JOIN ultg WHERE penyebab ='Hewan' AND nama_ultg='Bandarmasih'");
+              echo mysqli_num_rows($jlh_hwn);
+            ?>
+            ,
+            <?php 
+              $jlh_pltn = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,penyebab FROM status_gg NATURAL JOIN ultg WHERE penyebab ='Peralatan' AND nama_ultg='Bandarmasih'");
+              echo mysqli_num_rows($jlh_pltn);
+            ?>
+            ,
+            <?php 
+              $jlh_prtksi = mysqli_query($con, "SELECT id_gg,id_ultg,nama_ultg,penyebab FROM status_gg NATURAL JOIN ultg WHERE penyebab ='Proteksi' AND nama_ultg='Bandarmasih'");
+              echo mysqli_num_rows($jlh_prtksi);
+            ?>
+          ],
           backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
         }
       ]

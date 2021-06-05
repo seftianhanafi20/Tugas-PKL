@@ -32,9 +32,9 @@ if($level=="admin"){
             <div class="card">
               <div class="card-header">
 				<!-- <h3 class="card-title">DataTable with minimal features & hover style</h3> -->
-				<div style="float: right;">
+				<!-- <div style="float: right;">
 					<a href="add.php" class="btn btn-block bg-gradient-primary">Add <i class="fas fa-plus"></i></a>
-				</div>
+				</div> -->
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -88,7 +88,7 @@ if($level=="admin"){
 							<td class="text-center">
 								<div class="btn-group">
 									<a href="edit.php?id=<?=$data['id_ultg']?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-									<a href="del.php?id=<?=$data['id_ultg']?>" onclick="return confirm('Yakin akan menghapus data?')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+									<!-- <a href="del.php?id=<?=$data['id_ultg']?>" onclick="return confirm('Yakin akan menghapus data?')" class="btn btn-danger"><i class="fas fa-trash"></i></a> -->
 								</div>
 							</td>
 						</tr>

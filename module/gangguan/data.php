@@ -31,6 +31,7 @@ if($level=="admin"){
           <div class="col-12">
             <div class="card">
               <div class="card-header">
+				<input type="text" name="pencarian" id="pencarian" class="form-control" placeholder="Search..." aria-label="Search" style="width: 250px;">
 				<!-- <h3 class="card-title">DataTable with minimal features & hover style</h3> -->
               </div>
               <!-- /.card-header -->
@@ -53,7 +54,7 @@ if($level=="admin"){
 					<th>Action</th>
                   </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="tampil">
                   <?php
 				$batas = 10;
 				$hal = @$_GET['hal'];
@@ -63,7 +64,7 @@ if($level=="admin"){
 				} else {
 					$posisi = ($hal - 1) * $batas;
 				}
-				$no = 1;
+				$no = 0;
 				if($_SERVER['REQUEST_METHOD'] == "POST") {
 					$pencarian = trim(mysqli_real_escape_string($con, $_POST['pencarian']));
 					if($pencarian != '') {
@@ -78,12 +79,11 @@ if($level=="admin"){
 				} else {
 					$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user LIMIT $posisi, $batas";
 					$queryJml = "SELECT * FROM status_gg";
-					$no = $posisi + 1;
+					$no = $posisi + 0;
 				}
 				
 				$sql = mysqli_query($con, $query) or die (mysqli_error($con));
 				if(mysqli_num_rows($sql) > 0) {
-					$no=0;
 					while($data = mysqli_fetch_array($sql)) { 
 						$no++;
 						?>
@@ -103,7 +103,7 @@ if($level=="admin"){
 							<td class="text-center">
 								<div class="btn-group">
 									<a href="edit.php?id=<?=$data['id_gg']?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-									<a href="del.php?id=<?=$data['id_gg']?>" onclick="return confirm('Yakin akan menghapus data?')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+									<!-- <a href="del.php?id=<?=$data['id_gg']?>" onclick="return confirm('Yakin akan menghapus data?')" class="btn btn-danger"><i class="fas fa-trash"></i></a> -->
 								</div>
 							</td>
 						</tr>
@@ -117,6 +117,23 @@ if($level=="admin"){
                 </table>
 				</div>
               </div>
+			  <script type="text/javascript">
+					$(document).ready(function() {
+						$('#pencarian').on('keyup', function() {
+							$.ajax({
+								type: 'POST',
+								url: 'search.php',
+								data: {
+									pencarian: $(this).val()
+								},
+								cache: false,
+								success: function(data) {
+									$('#tampil').html(data);
+								}
+							});
+						});
+					});
+			  </script>
               <!-- /.card-body -->
 			  <?php
 					error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
@@ -381,7 +398,7 @@ if($level=="admin"){
 				} else {
 					$posisi = ($hal - 1) * $batas;
 				}
-				$no = 1;
+				$no = 0;
 				if($_SERVER['REQUEST_METHOD'] == "POST") {
 					$pencarian = trim(mysqli_real_escape_string($con, $_POST['pencarian']));
 					if($pencarian != '') {
@@ -396,12 +413,11 @@ if($level=="admin"){
 				} else {
 					$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user ORDER BY id_gg DESC LIMIT $posisi, $batas";
 					$queryJml = "SELECT * FROM status_gg";
-					$no = $posisi + 1;
+					$no = $posisi + 0;
 				}
 				
 				$sql = mysqli_query($con, $query) or die (mysqli_error($con));
 				if(mysqli_num_rows($sql) > 0) {
-					$no=0;
 					while($data = mysqli_fetch_array($sql)) { 
 						$no++;
 						?>

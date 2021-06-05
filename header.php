@@ -392,6 +392,15 @@ $file=$data['foto'];
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item open-menu">
+            <a href="<?=BASE_URL('dashboard')?>" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Home
+                <!-- <i class="right fas fa-angle-left"></i> -->
+              </p>
+            </a>
+          </li>
+          <li class="nav-item open-menu">
             <a href="<?=BASE_URL('module/gangguan/data.php')?>" class="nav-link">
               <i class="nav-icon fas fa-tools"></i>
               <p>
