@@ -62,13 +62,13 @@
                   <div class="form-group clearfix">
                     <label for="exampleInputEmail1">Kode</label><br>
                     <div class="icheck-primary d-inline">
-                      <input type="radio" id="radioPrimary1" name="kode" value="TL">
+                      <input type="radio" id="radioPrimary1" name="kode" value="TL" required>
                       <label for="radioPrimary1">
                         TL
                       </label>
                     </div>&nbsp;&nbsp;&nbsp;
                     <div class="icheck-primary d-inline">
-                      <input type="radio" id="radioPrimary2" name="kode" value="TR">
+                      <input type="radio" id="radioPrimary2" name="kode" value="TR" required>
                       <label for="radioPrimary2">
                         TR
                       </label>

@@ -96,7 +96,29 @@
 					$no=0;
 					while($data = mysqli_fetch_array($sql_user)) { 
 						$no++;
+						if($data['level']=="admin"){
 						?>
+						<tr>
+							<td><?php echo $no; ?>.</td>
+							<td><?=$data['level']?></td>
+							<td><?=$data['no_induk']?></td>
+							<td><?=$data['nama']?></td>
+							<td><?=$data['username']?></td>
+							<td><?=$data['password']?></td>
+							<td><?=$data['alamat']?></td>
+							<td><?=$data['jk']?></td>
+							<td><?=$data['no_hp']?></td>
+							<td><?=$data['email']?></td>
+							
+							<td class="text-center">
+								<div class="btn-group">
+									<a href="edit.php?id=<?=$data['id_user']?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+									<!-- <a href="del.php?id=<?=$data['id_user']?>" onclick="return confirm('Yakin akan menghapus data?')" class="btn btn-danger"><i class="fas fa-trash"></i></a> -->
+								</div>
+							</td>
+						</tr>
+					<?php
+						}elseif($data['level']!="admin"){?>
 						<tr>
 							<td><?php echo $no; ?>.</td>
 							<td><?=$data['level']?></td>
@@ -116,27 +138,15 @@
 								</div>
 							</td>
 						</tr>
-					<?php
+						<?php
+						}
 					}
 				} else {
 					echo "<tr><td colspan=\"4\" align=\"center\">Data tidak ditemukan</td></tr>";
 				}
 				?>
                   </tbody>
-                  <!-- <tfoot>
-                  <tr>
-				  	<th>No</th>
-                    <th>Nama</th>
-                    <th>Alamat</th>
-                    <th>Tempat lahir</th>
-					<th>Tanggal Lahir</th>
-					<th>Jenis Kelamin</th>
-					<th>Email</th>
-					<th>No. Hp</th>
-					<th>Gambar</th>
-					<th>Action</th>
-                  </tr>
-                  </tfoot> -->
+                 
                 </table>
 				</div>
               </div>

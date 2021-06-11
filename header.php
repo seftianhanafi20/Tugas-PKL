@@ -26,7 +26,32 @@ $file=$data['foto'];
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>UPT KalSelTeng</title>
-
+  <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <style>
+      #loader {
+          border: 12px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 12px solid #444444;
+          width: 70px;
+          height: 70px;
+          animation: spin 1s linear infinite;
+      }
+        
+      @keyframes spin {
+          100% {
+              transform: rotate(360deg);
+          }
+      }
+        
+      .center {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+      }
+  </style>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -66,6 +91,7 @@ $file=$data['foto'];
   <script src="<?=BASE_URL('asset/js/app.js');?>"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+<div id="loader" class="center"></div>
 <?php 
   if($level=="admin"){
     if($_SESSION['level']!='admin') {
@@ -425,3 +451,19 @@ $file=$data['foto'];
   </aside>
 </div>
 <?php } ?>
+
+<script>
+    document.onreadystatechange = function() {
+        if (document.readyState !== "complete") {
+            document.querySelector(
+              "body").style.visibility = "hidden";
+            document.querySelector(
+              "#loader").style.visibility = "visible";
+        } else {
+            document.querySelector(
+              "#loader").style.display = "none";
+            document.querySelector(
+              "body").style.visibility = "visible";
+        }
+    };
+</script>
