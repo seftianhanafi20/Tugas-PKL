@@ -12,7 +12,7 @@ if($level=="admin" || $level=="pegawai"){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Data Gangguan</h1>
+            <h1>Data Gangguan</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -43,13 +43,15 @@ if($level=="admin" || $level=="pegawai"){
 					<th>TRIP Lepas</th>
 					<th>TRIP Masuk</th>
 					<th>Durasi Number</th>
+					<th>Durasi Jam</th>
+					<th>Durasi Menit</th>
 					<th>Waktu Input</th>
 					<th>Action</th>
                   </tr>
                   </thead>
                   <tbody id="tampil">
                   <?php
-				$batas = 10;
+				$batas = 20;
 				$hal = @$_GET['hal'];
 				if(empty($hal)) {
 					$posisi = 0;
@@ -65,12 +67,12 @@ if($level=="admin" || $level=="pegawai"){
 						$query = $sql;
 						$queryJml = $sql;
 					} else {
-						$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user LIMIT $posisi, $batas";
+						$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user ORDER BY id_gg DESC LIMIT $posisi, $batas";
 						$queryJml = "SELECT * FROM status_gg";
 						$no = $posisi + 1;
 					}
 				} else {
-					$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user LIMIT $posisi, $batas";
+					$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user ORDER BY id_gg DESC LIMIT $posisi, $batas";
 					$queryJml = "SELECT * FROM status_gg";
 					$no = $posisi + 0;
 				}
@@ -92,6 +94,8 @@ if($level=="admin" || $level=="pegawai"){
 							<td><?=$data['waktu_trip_lepas']?></td>
 							<td><?=$data['waktu_trip_masuk']?></td>
 							<td><?=$data['durasi_number']?></td>
+							<td><?=$data['durasi_jam']?></td>
+							<td><?=$data['durasi_menit']?></td>
 							<td><?=$data['tgl_input']?></td>
 							<td class="text-center">
 								<div class="btn-group">
@@ -216,12 +220,14 @@ if($level=="admin" || $level=="pegawai"){
 					<th>TRIP Lepas</th>
 					<th>TRIP Masuk</th>
 					<th>Durasi Number</th>
+					<th>Durasi Jam</th>
+					<th>Durasi Menit</th>
 					<th>Waktu Input</th>
                   </tr>
                   </thead>
                   <tbody>
                   <?php
-				$batas = 10;
+				$batas = 20;
 				$hal = @$_GET['hal'];
 				if(empty($hal)) {
 					$posisi = 0;
@@ -229,7 +235,7 @@ if($level=="admin" || $level=="pegawai"){
 				} else {
 					$posisi = ($hal - 1) * $batas;
 				}
-				$no = 1;
+				$no = 0;
 				if($_SERVER['REQUEST_METHOD'] == "POST") {
 					$pencarian = trim(mysqli_real_escape_string($con, $_POST['pencarian']));
 					if($pencarian != '') {
@@ -238,18 +244,17 @@ if($level=="admin" || $level=="pegawai"){
 						$queryJml = $sql;
 					} else {
 						$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user WHERE id_user='$id_user' ORDER BY id_gg DESC LIMIT $posisi, $batas";
-						$queryJml = "SELECT * FROM status_gg";
+						$queryJml = "SELECT * FROM status_gg NATURAL JOIN tb_user WHERE id_user='$id_user'";
 						$no = $posisi + 1;
 					}
 				} else {
 					$query = "SELECT * FROM status_gg NATURAL JOIN transmisi_trafo NATURAL JOIN ultg NATURAL JOIN tb_user WHERE id_user='$id_user' ORDER BY id_gg DESC LIMIT $posisi, $batas";
-					$queryJml = "SELECT * FROM status_gg";
-					$no = $posisi + 1;
+					$queryJml = "SELECT * FROM status_gg NATURAL JOIN tb_user WHERE id_user='$id_user'";
+					$no = $posisi + 0;
 				}
 				
 				$sql = mysqli_query($con, $query) or die (mysqli_error($con));
 				if(mysqli_num_rows($sql) > 0) {
-					$no=0;
 					while($data = mysqli_fetch_array($sql)) { 
 						$no++;
 						?>
@@ -265,6 +270,8 @@ if($level=="admin" || $level=="pegawai"){
 							<td><?=$data['waktu_trip_lepas']?></td>
 							<td><?=$data['waktu_trip_masuk']?></td>
 							<td><?=$data['durasi_number']?></td>
+							<td><?=$data['durasi_jam']?></td>
+							<td><?=$data['durasi_menit']?></td>
 							<td><?=$data['tgl_input']?></td>					
 						</tr>
 					<?php

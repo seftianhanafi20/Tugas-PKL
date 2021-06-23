@@ -32,45 +32,48 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="package/dist/sweetalert2.all.min.js"></script>
+	<script src="sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="package/dist/sweetalert2.min.css">
 <!--===============================================================================================-->
 </head>
 <body>
 	
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-login100" style="background-image: url('images/bg-02.jpg');">
+		<?php
+			if(isset($_POST['login'])) {
+					$user = trim(mysqli_real_escape_string($con, $_POST['user']));
+					$pass = md5(trim(mysqli_real_escape_string($con, $_POST['pass'])));
+					$sql_login = mysqli_query($con, "SELECT * FROM tb_user WHERE no_induk = '$user' OR username='$user' AND password = '$pass'") or die (mysqli_error($con));//sebagai tracking error =or die (mysqli_error($con)
+					$data=mysqli_fetch_array($sql_login);
+					if(mysqli_num_rows($sql_login) > 0) {
+					$_SESSION['id_user'] = $data['id_user'];
+					$_SESSION['user'] = $user;
+					$_SESSION['level'] = $data['level'];
+					//$_SESSION['username'] = $data['username'];
+					echo "<script>alert('Selamat Anda Berhasil Login')</script>";
+					echo "<script>window.location='".base_url()."';</script>";
+					}
+					else{ ?>
+						<script>
+							Swal.fire({
+								icon: 'error',
+								title: 'Oops...',
+								text: 'Login Gagal. Username / Password Salah!',
+							})
+						</script>
+					
+					<?php
+					}
+				} 
+		?>
 			<div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41">
 					Silahkan Login
 				</span>
-				<?php
-                    if(isset($_POST['login'])) {
-                         $user = trim(mysqli_real_escape_string($con, $_POST['user']));
-                         $pass = md5(trim(mysqli_real_escape_string($con, $_POST['pass'])));
-						 $sql_login = mysqli_query($con, "SELECT * FROM tb_user WHERE no_induk = '$user' OR username='$user' AND password = '$pass'") or die (mysqli_error($con));//sebagai tracking error =or die (mysqli_error($con)
-						 $data=mysqli_fetch_array($sql_login);
-                         if(mysqli_num_rows($sql_login) > 0) {
-							$_SESSION['id_user'] = $data['id_user'];
-							$_SESSION['user'] = $user;
-							$_SESSION['level'] = $data['level'];
-							//$_SESSION['username'] = $data['username'];
-							echo "<script>alert('Selamat Anda Berhasil Login')</script>";
-                            echo "<script>window.location='".base_url()."';</script>";
-						 }
-                         else{ ?>
-                            
-                                <div class="col-lg-15 col-lg-offset-3">
-                                    <div class="alert alert-danger alert-dismissable" role="alert">
-                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                        <strong>Login Gagal!</strong> Username / Password Salah
-                                    </div>
-                                </div>
-                          
-                            <?php
-                         }
-                     } 
-                ?>
-				<form action="" method="post" class="login100-form validate-form p-b-33 p-t-5">
+				<form action="" method="POST" enctype="multipart/form-data" class="login100-form validate-form p-b-33 p-t-5">
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" type="text" name="user" placeholder="Username">
@@ -95,9 +98,6 @@
 			</div>
 		</div>
 	</div>
-	
-
-	<div id="dropDownSelect1"></div>
 	
 <!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>

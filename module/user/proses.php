@@ -12,7 +12,7 @@
         $level = trim(mysqli_real_escape_string($con, $_POST['level']));
         // $foto = trim(mysqli_real_escape_string($con, $_POST['foto']));
 
-        $sql = mysqli_query($con, "SELECT * FROM tb_user WHERE no_induk='$no_induk'");
+        $sql = mysqli_query($con, "SELECT * FROM tb_user WHERE no_induk='$no_induk' AND username='$username'");
 
         // Kalau username sudah ada yang pakai
         if (mysqli_num_rows($sql) > 0){ 

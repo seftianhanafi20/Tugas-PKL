@@ -12,7 +12,7 @@ $id = $_POST['id'];
 if($data == "tt"){
 	?>
 	Transmisi Trafo
-	<select id="form_kab">
+	<select id="form_tt">
 		<option value="">Pilih Transmisi Trafo</option>
 		<?php 
 		$sql_tt = mysqli_query($con,"SELECT * FROM transmisi_trafo WHERE id_ultg ='$id' ORDER BY nama_tt");

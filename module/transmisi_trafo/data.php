@@ -53,7 +53,7 @@ if($level=="admin"){
                   </thead>
                   <tbody id="tampil">
                   <?php
-				$batas = 10;
+				$batas = 20;
 				$hal = @$_GET['hal'];
 				if(empty($hal)) {
 					$posisi = 0;

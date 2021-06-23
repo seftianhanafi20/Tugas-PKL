@@ -75,7 +75,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">No. Telepon</label>
-                    <input type="text" class="form-control" name="no_hp" id="exampleInputEmail1" placeholder="No. Telepon" required>
+                    <input type="number" data-maxlength="13" oninput="this.value=this.value.slice(0,this.dataset.maxlength)" class="form-control" name="no_hp" id="exampleInputEmail1" placeholder="No. Telepon" required>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email</label>

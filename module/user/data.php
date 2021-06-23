@@ -75,18 +75,18 @@
 				if($_SERVER['REQUEST_METHOD'] == "POST") {
 					$pencarian = trim(mysqli_real_escape_string($con, $_POST['pencarian']));
 					if($pencarian != '') {
-						$sql = "SELECT * FROM tb_user WHERE level LIKE '%$pencarian%' OR nama LIKE '%$pencarian%' OR username LIKE '%$pencarian%' OR alamat LIKE '%$pencarian%'";
+						$sql = "SELECT * FROM tb_user WHERE level LIKE '%$pencarian%' OR nama LIKE '%$pencarian%' OR username LIKE '%$pencarian%' OR alamat LIKE '%$pencarian%' ORDER BY level AND nama DESC";
 						$query = $sql;
 						$queryJml = $sql;
 					} else {
 						$query = "SELECT *
-						FROM tb_user ORDER BY nama DESC LIMIT $posisi, $batas";
+						FROM tb_user ORDER BY level AND nama DESC LIMIT $posisi, $batas";
 						$queryJml = "SELECT * FROM tb_user";
 						$no = $posisi + 1;
 					}
 				} else {
 					$query = "SELECT *
-					FROM tb_user ORDER BY nama DESC LIMIT $posisi, $batas";
+					FROM tb_user ORDER BY level AND nama DESC LIMIT $posisi, $batas";
 					$queryJml = "SELECT * FROM tb_user";
 					$no = $posisi + 1;
 				}
